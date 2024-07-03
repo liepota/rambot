@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramble Coin</title>
+    <style>
+        body { text-align: center; }
+        button { font-size: 2em; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Ramble Coin</h1>
+    <button id="clicker">Click Me!</button>
+    <p>Coins: <span id="coins">0</span></p>
+    <script>
+        const user_id = 'user123'; // Замените на реальный ID пользователя
+        document.getElementById('clicker').onclick = function() {
+            fetch('/click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: user_id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('coins').innerText = data.coins;
+            });
+        }
+    </script>
+</body>
+</html>
